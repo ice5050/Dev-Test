@@ -5,5 +5,5 @@ WITH latest_comments AS (
 SELECT p.content `Post`, lc.content `Most recent comment`
 FROM posts p
 LEFT JOIN latest_comments lc
-ON p.post_id = lc.post_id
+USING(post_id)
 WHERE lc.rn = 1 OR lc.rn IS NULL;
