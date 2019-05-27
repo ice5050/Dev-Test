@@ -4,7 +4,7 @@ function rotate(arr, n) {
   if (n <= 0) return arr
   else if (arr.length === 0) return arr
   else {
-    return rotate(arr.slice(1).concat(arr[0]), n - 1)
+    return rotate(arr.slice(1).concat(arr[0]), (n % arr.length) - 1)
   }
 }
 
