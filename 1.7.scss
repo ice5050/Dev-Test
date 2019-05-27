@@ -1,0 +1,34 @@
+$screen-sizes: ((2, 640), (3, 1024), (4, 1440));
+$main-color: #F0F;
+
+@mixin hidden {
+  display: none;
+}
+
+.grid {
+  display: block;
+  border: 1px solid $main-color;
+  margin: 0 auto;
+}
+
+.grid > .tile .title {
+  @include hidden;
+  color: $main-color;
+}
+
+@each $col, $size in $screen-sizes {
+  @media (min-width: $size + "px") {
+    @if $size == 640 {
+      .grid > .tile { float: left; }
+    } @else if $size == 1024 {
+      .grid { max-width: 80%; }
+      .grid > .tile .title { display: block; }
+    } @else if $size == 1440 {
+      .grid { max-width: 65%; }
+    }
+
+    @for $i from 1 through $col {
+      .grid > .tile#{if($i == 1, "", ".width-#{$i}")} { width: floor($i / $col * 100%); }
+    }
+  }
+}
